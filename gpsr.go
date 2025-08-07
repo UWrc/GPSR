@@ -142,8 +142,8 @@ func GetHomeDepartment(client *http.Client, netID string) string {
 
 func main() {
 	// Paths to your client certificate and private key files
-	CertFile := "user-reports.hyakm.washington.edu.crt"
-	KeyFile := "user-reports.hyakm.washington.edu.key"
+	CertFile := "/etc/pki/tls/certs/user-reports.hyakm.washington.edu.crt"
+	KeyFile := "/etc/pki/tls/private/user-reports.hyakm.washington.edu.key"
 
 	client := GetClient(CertFile, KeyFile)
 
