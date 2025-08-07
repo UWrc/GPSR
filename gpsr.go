@@ -186,6 +186,26 @@ func main() {
 		// Get departments.
 		HomeDepartment := GetHomeDepartment(client, MemberManagerNetID)
 
-		fmt.Printf("%d,%s,%s,%d,%s,%s,%s\n", i+1, group, account, len(GroupNetIDs), MemberManagerName, MemberManagerNetID, HomeDepartment)
+		College := "None"
+		Department := "None"
+		Lab := "None"
+		// Split out College: Department - Group.
+		parts := strings.SplitN(HomeDepartment, ":", 2)
+		if len(parts) != 2 {
+			Department = HomeDepartment
+		} else {
+			College = strings.TrimSpace(parts[0])
+
+			rest := strings.TrimSpace(parts[1])
+			if strings.Contains(rest, " - ") {
+				subParts := strings.SplitN(rest, " - ", 2)
+				Department = strings.TrimSpace(subParts[0])
+				Lab = strings.TrimSpace(subParts[1])
+			} else {
+				Department = rest
+			}
+		}
+
+		fmt.Printf("%d,%s,%s,%d,%s,%s,%s,%s,%s\n", i+1, group, account, len(GroupNetIDs), MemberManagerName, MemberManagerNetID, College, Department, Lab)
 	}
 }
